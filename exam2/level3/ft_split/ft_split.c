@@ -6,72 +6,41 @@
 /*   By: dduarte- <dduarte-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 09:43:23 by dduarte-          #+#    #+#             */
-/*   Updated: 2023/07/27 10:20:56 by dduarte-         ###   ########.fr       */
+/*   Updated: 2023/08/04 10:29:33 by dduarte-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 
-int			ft_isspace(char c)
+char    **ft_split(char *str)
 {
-	return (c == ' ' || c == '\n' || c == '\t');
-}
+    char **split;
+    int i = 0;
+    int row = 0;
+    int colum;
 
-int		count_words(char *str)
-{
-	int	count;
-
-	count = 0;
-	while (*str)
-	{
-		while (*str && ft_isspace(*str))
-			str++;
-		if (*str && !ft_isspace(*str))
-		{
-			count++;
-			while (*str && !ft_isspace(*str))
-				str++;
-		}
-	}
-	return (count);
-}
-
-char	*malloc_word(char *str)
-{
-	char *word;
-	int	i;
-
-	i = 0;
-	while (str[i] && !ft_isspace(str[i]))
-		i++;
-	word = (char *)malloc(sizeof(char) * (i + 1));
-	i = 0;
-	while (str[i] && !ft_isspace(str[i]))
-	{
-		word[i] = str[i];
-		i++;
-	}
-	word[i] = '\0';
-	return (word);
-}
-
-char	**ft_split(char *str)
-{
-	char **arr = (char **)malloc(sizeof(char *) * (count_words(str) + 1));
-
-	int i = 0;
-	while (*str)
-	{
-		while (*str && ft_isspace(*str))
-			str++;
-		if (*str && !ft_isspace(*str))
-		{
-			arr[i] = malloc_word(str);
-			i++;
-			while (*str && !ft_isspace(*str))
-				str++;
-		}
-	}
-	arr[i] = NULL;
-	return (arr);
+    split = malloc(sizeof (char*) * 256);
+    if(!split)
+        return 0;
+    while (str[i] == ' ' || str[i] == '\t' || str[i] =='\n')
+        i++;
+    while(str[i] != '\0')
+    {
+        colum = 0;
+        split[row] = malloc(sizeof (char) * 4000);
+        if(!split[row])
+            return 0;
+        while(str[i] != ' ' && str[i] != '\t' && str[i] !='\n' && str[i])
+        {
+            split[row][colum] = str[i];
+            colum++;
+            i++;
+        }
+        split[row][colum] = '\0';
+        while (str[i] == ' ' || str[i] == '\t' || str[i] =='\n')
+            i++;
+        row ++;
+    }
+    split[row] = NULL;
+    return(split);
 }
