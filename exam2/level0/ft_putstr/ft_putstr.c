@@ -6,7 +6,7 @@
 /*   By: dduarte- <dduarte-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 08:49:52 by dduarte-          #+#    #+#             */
-/*   Updated: 2023/07/27 08:51:45 by dduarte-         ###   ########.fr       */
+/*   Updated: 2023/08/08 08:37:35 by dduarte-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,3 +21,10 @@ void	ft_putstr(char *str)
 		i++;
 	}
 }
+
+// void	ft_putstr(char *str)
+// {
+// 	int i = -1;
+// 	while(str[++i])
+// 		write(1,&str[i],1);
+// }
