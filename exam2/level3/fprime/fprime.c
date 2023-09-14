@@ -6,12 +6,9 @@
 /*   By: dduarte- <dduarte-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 10:05:53 by dduarte-          #+#    #+#             */
-/*   Updated: 2023/08/04 10:14:18 by dduarte-         ###   ########.fr       */
+/*   Updated: 2023/09/14 10:35:50 by dduarte-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include <stdio.h>
-#include <stdlib.h>
 
 #include <stdio.h>
 #include <stdlib.h>
