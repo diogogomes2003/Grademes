@@ -9,31 +9,32 @@
 
 int	ft_strlen(char *str)
 {
-	int i = 0;
-	if(!str)
+	int len = 0;
+	if (!str)
 		return (0);
-	while(str[i])
-		i++;
-	return(i);
+	while (str[len])
+		len++;
+	return (len);
 }
 
 char	*ft_cut_line(char *temp)
 {
-	int i,j = 0;
+	int i = 0;
+	int j = 0;
 	char *remain;
 
 	while (temp[i] && temp[i] != '\n')
 		i++;
-	if(!temp[i] || temp[0] == '\0')
+	if (!temp[i] || temp[0] == '\0')
 	{
-		free(temp);	
+		free(temp);
 		return (NULL);
 	}
-	remain = malloc(sizeof(char) * (ft_strlen(temp)));
-	if(!remain)
+	remain = malloc(sizeof(char) * (ft_strlen(temp) - i + 1));
+	if (!remain)
 		return (NULL);
 	i++;
-	while(temp[i])
+	while (temp[i])
 	{
 		remain[j] = temp[i];
 		j++;
@@ -47,7 +48,7 @@ char	*ft_cut_line(char *temp)
 		return (NULL);
 	}
 	free(temp);
-	return(remain);
+	return (remain);
 }
 
 char	*ft_get_line(char *temp)
@@ -58,15 +59,15 @@ char	*ft_get_line(char *temp)
 	while (temp[i] && temp[i] != '\n')
 		i++;
 	line = malloc(sizeof(char) * (i + 2));
-	if(!line)
-		return(NULL);
+	if (!line)
+		return (NULL);
 	i = 0;
-	while (temp[i] && temp[i] != '\0')
+	while (temp[i] && temp[i] != '\n')
 	{
 		line[i] = temp[i];
 		i++;
 	}
-	if(temp[i] == '\n')
+	if (temp[i] == '\n')
 	{
 		line[i] = '\n';
 		i++;
@@ -78,21 +79,23 @@ char	*ft_get_line(char *temp)
 char	*ft_strjoin(char *temp, char *buffer)
 {
 	char *array;
-	int i,j,size = 0;
-	
-	if(!buffer && !temp)
-		return(NULL);
+	int i = 0;
+	int j = 0;
+	int size = 0;
+
+	if (!buffer && !temp)
+		return (NULL);
 	size = ft_strlen(buffer) + ft_strlen(temp);
 	array = malloc(sizeof(char) * (size + 1));
-	if(!array)
+	if (!array)
 	{
 		free(buffer);
 		free(temp);
 		return (NULL);
 	}
-	if(temp)
+	if (temp)
 	{
-		while(temp[i])
+		while (temp[i])
 		{
 			array[i] = temp[i];
 			i++;
@@ -102,30 +105,29 @@ char	*ft_strjoin(char *temp, char *buffer)
 	{
 		array[i] = buffer[j];
 		i++;
-		j--;
+		j++;
 	}
 	array[i] = '\0';
 	free(temp);
-	return(array);
-	
+	return (array);
 }
 
 int	ft_strchr(char *str)
 {
 	int i = 0;
 
-	while(str[i])
+	while (str[i])
 	{
-		if(str[i] == '\n')
+		if (str[i] == '\n')
 			return (1);
 		i++;
 	}
-	return(0);
+	return (0);
 }
 
 char	*get_next_line(int fd)
 {
-	if(fd < 0 || BUFFER_SIZE <= 0)
+	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	static char *temp;
 	char *buffer;
@@ -133,7 +135,7 @@ char	*get_next_line(int fd)
 	int count = 1;
 
 	buffer = malloc(sizeof(char) * (BUFFER_SIZE + 1));
-	if(!buffer)
+	if (!buffer)
 		return (NULL);
 	buffer[0] = '\0';
 	while (!ft_strchr(buffer) && count != 0)
@@ -148,7 +150,7 @@ char	*get_next_line(int fd)
 	}
 	line = ft_get_line(temp);
 	temp = ft_cut_line(temp);
-	if(line[0] == '\0')
+	if (line[0] == '\0')
 	{
 		free(line);
 		free(buffer);
